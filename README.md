@@ -15,14 +15,14 @@ Partición corregida (sin réplicas entre conjuntos), evaluación única en prue
 | Segmentación (n = 260) | U-Net, encoder ResNet-18 | Dice 0,883 (IC 95 %: 0,863–0,899), IoU 0,813, 9,0 ms/imagen |
 
 Auditoría de datos: SHA-256 no encontró duplicados exactos; un hash perceptual (dHash, Hamming ≤ 2) encontró 6.344 pares candidatos entre particiones, agrupados en 732 grupos que obligaron a reasignar 1.209 imágenes.
-El informe completo está en [`paper/main.tex`](paper/main.tex).
+El informe completo está en [`paper/VPCII_TpFinal.tex`](paper/VPCII_TpFinal.tex).
 
 ## Estructura del repositorio
 
 ```
 .
 ├── notebooks/
-│   └── melanoma_clasificacion_segmentacion.ipynb   # pipeline completo (datos → auditoría → modelos → evaluación)
+│   └── VpCII_TP_Final_C.ipynb   # pipeline completo (datos → auditoría → modelos → evaluación)
 ├── paper/                                          # informe IEEE en LaTeX
 ├── results/                                        # métricas livianas de la corrida final
 ├── requirements.txt
@@ -43,7 +43,7 @@ Si `kagglehub` pide credenciales, crear un token en Kaggle (*Settings → API*) 
 ## Cómo reproducir
 
 ### Opción A: Google Colab (recomendada)
-1. Subir `notebooks/melanoma_clasificacion_segmentacion.ipynb` a Colab.
+1. Subir `notebooks/VpCII_TP_Final_C.ipynb` a Colab.
 2. Activar GPU: *Entorno de ejecución → Cambiar tipo → GPU*.
 3. *Ejecutar todo*. El notebook instala `kagglehub`, `albumentations` y `segmentation-models-pytorch` en sus primeras celdas.
 
@@ -51,7 +51,7 @@ Si `kagglehub` pide credenciales, crear un token en Kaggle (*Settings → API*) 
 ```bash
 python -m venv .venv && source .venv/bin/activate    # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-jupyter notebook notebooks/melanoma_clasificacion_segmentacion.ipynb
+jupyter notebook notebooks/VpCII_TP_Final_C.ipynb
 ```
 Se recomienda GPU con CUDA; en CPU el entrenamiento tarda varias horas.
 
@@ -75,7 +75,10 @@ La semilla está fija (`SEED = 42`) y se activa el modo determinista de cuDNN. A
 
 ## Autores
 
-Federico Tombesi y compañeros del equipo (completar nombres).
+Federico Tombesi 
+Tomás Civini
+Hernán Ruggeri
+Pablo Gorosito
 
 ## Licencia
 
