@@ -1,0 +1,20 @@
+# Salidas pesadas del notebook (se regeneran al ejecutarlo)
+outputs/
+seg_outputs/
+*.pt
+*.pth
+# Datos (se descargan con kagglehub)
+data/
+.cache/
+# Python / Jupyter
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+# LaTeX
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.synctex.gz
+.DS_Store
