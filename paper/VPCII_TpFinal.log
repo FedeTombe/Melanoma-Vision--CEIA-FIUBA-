@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.11)  11 OCT 2026 14:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.11)  11 OCT 2026 18:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -343,8 +343,8 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__pdf_internal_box=\box59
 )
 (./VPCII_TpFinal.aux
-LaTeX Info: Redefining \. on input line 17.
-LaTeX Info: Redefining \% on input line 17.
+LaTeX Info: Redefining \. on input line 14.
+LaTeX Info: Redefining \% on input line 14.
 )
 \openout1 = `VPCII_TpFinal.aux'.
 
@@ -388,108 +388,113 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Trying to load font information for U+msa on input line 50.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 58.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 58.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 50.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 58.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 50.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 58
+.
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd)
-Overfull \hbox (2.5285pt too wide) in paragraph at lines 112--112
-[]|\T1/ptm/m/n/8 Segmentación| 
- []
-
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-
-dist/fonts/enc/dvips/base/8r.enc}
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texm
+f-dist/fonts/enc/dvips/base/8r.enc}
 
 
 ]
-Underfull \hbox (badness 3128) in paragraph at lines 141--142
+Overfull \hbox (2.5285pt too wide) in paragraph at lines 113--113
+[]|\T1/ptm/m/n/8 Segmentación| 
+ []
+
+
+Underfull \hbox (badness 3128) in paragraph at lines 142--143
 []\T1/ptm/m/n/10 Se en-tre-na una U-Net [10] con en-co-der ResNet-18
  []
 
 
-Underfull \hbox (badness 1466) in paragraph at lines 141--142
+Underfull \hbox (badness 1466) in paragraph at lines 142--143
 \T1/ptm/m/n/10 pre-en-tre-na-do en Ima-ge-Net, usan-do la li-bre-ría seg-men-ta
 -
  []
 
-<curvas_segmentacion.PNG, id=12, 825.58438pt x 233.37187pt>
+[2] [3]
+<curvas_segmentacion.PNG, id=27, 825.58438pt x 233.37187pt>
 File: curvas_segmentacion.PNG Graphic file (type png)
 <use curvas_segmentacion.PNG>
-Package pdftex.def Info: curvas_segmentacion.PNG  used on input line 162.
+Package pdftex.def Info: curvas_segmentacion.PNG  used on input line 264.
 (pdftex.def)             Requested size: 464.39685pt x 131.2749pt.
-<casos_mejores.PNG, id=14, 589.70313pt x 410.03188pt>
+<casos_mejores.PNG, id=29, 589.70313pt x 410.03188pt>
 File: casos_mejores.PNG Graphic file (type png)
 <use casos_mejores.PNG>
-Package pdftex.def Info: casos_mejores.PNG  used on input line 171.
-(pdftex.def)             Requested size: 247.6778pt x 172.21846pt.
-<casos_medianos.PNG, id=15, 576.65437pt x 410.53375pt>
+Package pdftex.def Info: casos_mejores.PNG  used on input line 273.
+(pdftex.def)             Requested size: 237.36346pt x 165.04218pt.
+<casos_medianos.PNG, id=30, 576.65437pt x 410.53375pt>
 File: casos_medianos.PNG Graphic file (type png)
 <use casos_medianos.PNG>
-Package pdftex.def Info: casos_medianos.PNG  used on input line 176.
-(pdftex.def)             Requested size: 247.6778pt x 176.3256pt.
-<casos_peores.PNG, id=16, 580.66937pt x 408.02437pt>
+Package pdftex.def Info: casos_medianos.PNG  used on input line 278.
+(pdftex.def)             Requested size: 237.36346pt x 168.98393pt.
+<casos_peores.PNG, id=31, 580.66937pt x 408.02437pt>
 File: casos_peores.PNG Graphic file (type png)
 <use casos_peores.PNG>
-Package pdftex.def Info: casos_peores.PNG  used on input line 181.
-(pdftex.def)             Requested size: 247.6778pt x 174.04pt.
-[2]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-<hist_dice_test.png, id=29, 426.393pt x 281.853pt>
+Package pdftex.def Info: casos_peores.PNG  used on input line 283.
+(pdftex.def)             Requested size: 237.36346pt x 166.793pt.
+<hist_dice_test.png, id=32, 426.393pt x 281.853pt>
 File: hist_dice_test.png Graphic file (type png)
 <use hist_dice_test.png>
-Package pdftex.def Info: hist_dice_test.png  used on input line 208.
+Package pdftex.def Info: hist_dice_test.png  used on input line 310.
 (pdftex.def)             Requested size: 239.39923pt x 158.24516pt.
+ [4 <./hist_dice_test.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [3 <./curvas_segmentacion.PNG> <./casos_mejores.PNG> <./casos_medianos.PNG> <.
-/casos_peores.PNG>] [4 <./hist_dice_test.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 345--346
+ [5 <./curvas_segmentacion.PNG> <./casos_mejores.PNG> <./casos_medianos.PNG> <.
+/casos_peores.PNG>]
+Underfull \hbox (badness 10000) in paragraph at lines 359--360
 []\T1/ptm/m/n/8 ailearner-researchlab, ``Me-la-no-ma skin can-cer da-ta-set:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 345--346
+Underfull \hbox (badness 10000) in paragraph at lines 359--360
 \T1/ptm/m/n/8 be-nign vs ma-lig-nant,'' Kag-gle. [En lí-nea]. Dis-po-ni-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 345--346
+Underfull \hbox (badness 10000) in paragraph at lines 359--360
 \T1/ptm/m/n/8 ble: $https : / / www . kaggle . com / datasets / ailearner-[]res
 earchlab /
  []
 
 
-Underfull \hbox (badness 2556) in paragraph at lines 351--352
+Underfull \hbox (badness 2556) in paragraph at lines 365--366
 []\T1/ptm/m/n/8 tschandl (usua-rio de Kag-gle), ``ISIC2018 Cha-llen-ge Task1 Da
 -ta
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--352
+Underfull \hbox (badness 10000) in paragraph at lines 365--366
 \T1/ptm/m/n/8 (Seg-men-ta-tion),'' Kag-gle, es-pe-jo del de-sa-fío ISIC 2018. [
 En
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--352
+Underfull \hbox (badness 10000) in paragraph at lines 365--366
 \T1/ptm/m/n/8 lí-nea]. Dis-po-ni-ble: $https : / / www . kaggle . com / dataset
 s / tschandl /
  []
 
 
-Underfull \hbox (badness 4886) in paragraph at lines 366--367
+Underfull \hbox (badness 4886) in paragraph at lines 380--381
 []\T1/ptm/m/n/8 P. Ia-ku-bovs-kii, ``Seg-men-ta-tion Mo-dels Py-torch,'' GitHub
 , 2019.
  []
@@ -505,9 +510,11 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[5] (./VPCII_TpFinal.aux
-LaTeX Info: Redefining \. on input line 17.
-LaTeX Info: Redefining \% on input line 17.
+[6
+
+] (./VPCII_TpFinal.aux
+LaTeX Info: Redefining \. on input line 14.
+LaTeX Info: Redefining \% on input line 14.
 )
  ***********
 LaTeX2e <2023-11-01> patch level 1
@@ -515,13 +522,13 @@ L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 6272 strings out of 476120
- 98610 string characters out of 5793656
- 1944975 words of memory out of 5000000
- 28190 multiletter control sequences out of 15000+600000
- 681978 words of font info for 173 fonts, out of 8000000 for 9000
+ 6274 strings out of 476120
+ 98651 string characters out of 5793656
+ 1945975 words of memory out of 5000000
+ 28193 multiletter control sequences out of 15000+600000
+ 677195 words of font info for 171 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 57i,11n,65p,1065b,385s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,14n,65p,1195b,365s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texliv
@@ -531,15 +538,15 @@ nts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
-times/utmri8a.pfb>
-Output written on VPCII_TpFinal.pdf (5 pages, 2074397 bytes).
+cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/urw/times/utmri8a.pfb>
+Output written on VPCII_TpFinal.pdf (6 pages, 2076267 bytes).
 PDF statistics:
- 107 PDF objects out of 1000 (max. 8388607)
- 59 compressed objects within 1 object stream
+ 110 PDF objects out of 1000 (max. 8388607)
+ 61 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

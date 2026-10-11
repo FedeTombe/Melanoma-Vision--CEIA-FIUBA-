@@ -19,48 +19,49 @@
 
 \begin{document}
 	
-	\title{Técnicas de Visión por Computadora para lesiones cutáneas*\\
-		{\footnotesize \textsuperscript{*}Clasificación y segmentación de imágenes aplicadas a la identificación de melanomas}}
+	\title{Clasificación y segmentación de lesiones cutáneas mediante modelos preentrenados}
 	
-	\author{\IEEEauthorblockN{1\textsuperscript{st} Civini, Tomás}
-		\IEEEauthorblockA{\textit{Especialización en IA (CEIA)} \\
-			\textit{Universidad de Buenos Aires}\\
-			Ciudad, País \\
-			tcivini@gmail.com}
-		\and
-		\IEEEauthorblockN{2\textsuperscript{nd} Gorosito, Pablo}
-		\IEEEauthorblockA{\textit{Especialización en IA (CEIA)} \\
-			\textit{Universidad de Buenos Aires}\\
-			Ciudad, País \\
-			Pablodgorosito@gmail.com}
-		\and
-		\IEEEauthorblockN{3\textsuperscript{rd} Ruggeri, Hernán}
-		\IEEEauthorblockA{\textit{Especialización en IA (CEIA)} \\
-			\textit{Universidad de Buenos Aires}\\
-			Ciudad, País \\
-			hruggeri.01@gmail.com}
-		\and
-		\IEEEauthorblockN{4\textsuperscript{th} Tombesi, Federico}
-		\IEEEauthorblockA{\textit{Especialización en IA (CEIA)} \\
-			\textit{Universidad de Buenos Aires}\\
-			Comodoro Rivadavia, Argentina \\
-			federicotombesi45@gmail.com}
+	\author{%
+		\begin{tabular}{@{}c@{\hspace{1.5em}}c@{}}
+			\parbox[t]{0.40\textwidth}{\centering\normalsize Civini, Tomás\par\small\textit{Especialización en IA (CEIA)}\par\textit{Universidad de Buenos Aires}\par Ciudad Autónoma de Buenos Aires, Argentina\par tcivini@gmail.com}
+			&
+			\parbox[t]{0.40\textwidth}{\centering\normalsize Gorosito, Pablo\par\small\textit{Especialización en IA (CEIA)}\par\textit{Universidad de Buenos Aires}\par Ciudad, País\par Pablodgorosito@gmail.com}\\[2.2em]
+			\parbox[t]{0.40\textwidth}{\centering\normalsize Ruggeri, Hernán\par\small\textit{Especialización en IA (CEIA)}\par\textit{Universidad de Buenos Aires}\par Ciudad, País\par hruggeri.01@gmail.com}
+			&
+			\parbox[t]{0.40\textwidth}{\centering\normalsize Tombesi, Federico\par\small\textit{Especialización en IA (CEIA)}\par\textit{Universidad de Buenos Aires}\par Comodoro Rivadavia, Argentina\par federicotombesi45@gmail.com}
+		\end{tabular}%
 	}
 	
-	\maketitle
-	
-	\begin{abstract}
-		Se presenta un prototipo académico que clasifica imágenes dermoscópicas como benignas o malignas y segmenta la lesión con modelos preentrenados, y que detecta réplicas entre entrenamiento y prueba en la partición pública del dataset de clasificación. Se comparan EfficientNet-B0 y ResNet-18 (cabeza congelada y ajuste completo), con selección de modelo por AUC de validación y un umbral que asegura sensibilidad mínima de 0,90 en validación. La auditoría con SHA-256 no halló duplicados exactos, pero un hash perceptual encontró 6.344 pares candidatos entre particiones, agrupados en 732 grupos que obligaron a reasignar 1.209 imágenes. Con la partición corregida, ResNet-18 con ajuste completo alcanza en prueba ($n = 1.152$) un AUC de 0,977, una sensibilidad de 0,927 y una especificidad de 0,914, con 3,7 ms por imagen. La segmentación con U-Net (encoder ResNet-18) sobre ISIC 2018 alcanza un Dice de 0,883 en prueba con 9,0 ms por imagen. El sistema es un prototipo y no una herramienta diagnóstica.
-	\end{abstract}
-	
-	\begin{IEEEkeywords}
-		melanoma, clasificación de imágenes, segmentación, transfer learning, fuga de datos, U-Net.
-	\end{IEEEkeywords}
+	% El bloque inicial ocupa todo el ancho antes de iniciar las dos columnas.
+	\makeatletter
+	\twocolumn[
+		\begin{@twocolumnfalse}
+			\maketitle
+			\vspace{0.75em}
+			\begin{center}
+				{\large\bfseries Resumen\par}
+				\vspace{0.45em}
+				\begin{minipage}{0.88\textwidth}
+					\small\noindent
+					Se presenta un prototipo académico para clasificar imágenes dermoscópicas según las etiquetas \texttt{Benign} y \texttt{Malignant} y segmentar lesiones cutáneas. Ambas tareas se entrenan y evalúan por separado sobre dos conjuntos públicos. Para clasificación se comparan EfficientNet-B0 y ResNet-18, con entrenamiento de la cabeza y base congelada, seguido de ajuste completo. El modelo se selecciona por el área bajo la curva ROC (AUC) de validación y el umbral maximiza la especificidad entre los que alcanzan sensibilidad $\geq 0{,}90$ en ese conjunto. La auditoría no encontró archivos idénticos mediante SHA-256; dHash identificó 6.344 pares candidatos, cuyo agrupamiento motivó la reasignación de 1.209 imágenes. En la prueba reasignada ($n = 1.152$), ResNet-18 obtuvo AUC de 0,977, sensibilidad de 0,927 y especificidad de 0,914, con latencia de 3,7 ms por imagen. U-Net con encoder ResNet-18 obtuvo Dice medio de 0,883 sobre 260 imágenes de ISIC 2018 y latencia de 9,0 ms. La revisión parcial de similitudes y la consulta previa de parte de la prueba limitan la independencia de la evaluación. El prototipo no cuenta con validación clínica.
+				\end{minipage}
+				\vspace{0.65em}
+
+				{\bfseries Palabras clave\par}
+				\vspace{0.3em}
+				\begin{minipage}{0.88\textwidth}
+					\small\centering melanoma, clasificación de imágenes, segmentación, transfer learning, fuga de datos, U-Net.
+				\end{minipage}
+			\end{center}
+			\vspace{0.9em}
+		\end{@twocolumnfalse}
+	]
+	\makeatother
 	
 	%====================================================================
 	\section{Introducción}
 	
-	Este trabajo desarrolla un prototipo académico que clasifica imágenes dermoscópicas como benignas o malignas y segmenta la lesión, y muestra que la validez de sus métricas depende de la independencia entre particiones de datos. El melanoma es la forma más letal de cáncer de piel y su identificación temprana es clave para reducir la morbilidad y la mortalidad~\cite{mahmoud2024}. Como el diagnóstico se apoya en la inspección dermatoscópica por especialistas, los sistemas de deep learning se estudian como apoyo para priorizar casos sospechosos, y no como reemplazo del criterio médico.
+	Este trabajo desarrolla un prototipo académico de clasificación y segmentación de lesiones cutáneas mediante modelos preentrenados. Las tareas se evalúan por separado y se incluye una auditoría de similitud del conjunto de clasificación para examinar posibles coincidencias entre particiones. El melanoma es la forma más letal de cáncer de piel y su identificación temprana es clave para reducir la morbilidad y la mortalidad~\cite{mahmoud2024}. Como el diagnóstico se apoya en la inspección dermatoscópica por especialistas, los sistemas de deep learning se estudian como apoyo para priorizar casos sospechosos, y no como reemplazo del criterio médico.
 	
 	\subsection{Antecedentes recientes}
 	
@@ -70,24 +71,24 @@
 	
 	Diseñar y validar, con modelos preentrenados y decisiones justificadas por métricas, un prototipo que:
 	\begin{itemize}
-		\item clasifique imágenes dermoscópicas en benignas o malignas, y
+		\item clasifique imágenes dermoscópicas en benignas o malignas
 		\item segmente la lesión.
 	\end{itemize}
-	El uso previsto es de apoyo y priorización, por lo que se prioriza la sensibilidad sobre la exactitud global.
+	El prototipo explora una posible función de apoyo a la priorización de casos. Por ese motivo, se adopta una sensibilidad objetivo de 0,90 en validación como criterio académico de selección del umbral; su uso clínico no se evalúa en este trabajo.
 	
 	\subsection{Contribuciones}
 	
 	\begin{itemize}
 		\item Comparación controlada de EfficientNet-B0 y ResNet-18, con selección de arquitectura y umbral solo con validación.
-		\item Auditoría del dataset público: el hash exacto no detecta réplicas, pero un hash perceptual encuentra 6.344 pares candidatos entre particiones, que se agrupan y se reasignan.
+		\item Auditoría del conjunto público mediante hash de archivo y hash perceptual: se identifican 6.344 pares candidatos entre particiones y se reasignan imágenes según los grupos resultantes. La similitud perceptual no acredita por sí sola que todos los pares sean réplicas.
 		\item Segmentación con U-Net (encoder ResNet-18) sobre ISIC 2018 Tarea 1: Dice de 0,883 en prueba con 9,0 ms por imagen.
-		\item Análisis de operación: umbral que garantiza sensibilidad mínima de 0,90 en validación y efecto de la prevalencia sobre la precisión de las alertas.
+		\item Análisis del umbral de decisión: selección en validación bajo una sensibilidad objetivo de 0,90 y cálculo ilustrativo del valor predictivo positivo para distintas prevalencias supuestas.
 	\end{itemize}
 	
 	%====================================================================
 	\section{Metodología}
 	
-	El diseño usa dos datasets públicos independientes, uno para clasificar y otro para segmentar, con particiones reproducibles (semilla 42) y selección de modelo y umbral solo con validación.
+	El diseño utiliza dos conjuntos públicos distintos, uno para clasificación y otro para segmentación, con particiones generadas con semilla 42. La arquitectura y el umbral de clasificación se seleccionan en validación; para segmentación, se conserva la versión del modelo que obtiene la mayor coincidencia con las máscaras de referencia del conjunto de validación, medida mediante el coeficiente Dice. El uso de conjuntos distintos no acredita independencia por paciente ni ausencia de coincidencias entre sus imágenes.
 	
 	\subsection{Datos}
 	
@@ -112,14 +113,14 @@
 		\end{tabularx}
 	\end{table}
 	
-	Las etiquetas del dataset de clasificación provienen de los nombres de carpeta. Corresponde a la versión 1 en Kaggle; su fuente primaria y su licencia no pudieron verificarse y se declaran como limitación. Los dos datasets son distintos: el de clasificación no trae máscaras, por lo que la segmentación se entrena y evalúa por separado (Cuadro~\ref{tab:datos}).
+	Las etiquetas del dataset de clasificación provienen de los nombres de carpeta. La descarga utilizada corresponde a la versión 1 de Kaggle; la fuente primaria y la licencia del conjunto de clasificación permanecen pendientes de verificación. Los dos datasets son distintos: el de clasificación no trae máscaras, por lo que la segmentación se entrena y evalúa por separado (Cuadro~\ref{tab:datos}).
 	
-	\subsection{Auditoría de integridad y partición sin réplicas}
+	\subsection{Auditoría de integridad y reasignación por similitud perceptual}
 	\label{sec:auditoria}
 	
 	La auditoría se hizo en dos pasos. Primero, un hash SHA-256 de cada archivo detectó 0 grupos idénticos entre particiones. Segundo, un hash perceptual dHash de 64 bits (imagen en grises de $9\times8$) con distancia de Hamming $\leq 2$ encontró 6.344 pares candidatos entre particiones. La inspección visual de una muestra de pares con distancia 0 confirmó que son la misma imagen con compresión o recortes distintos.
 	
-	Los pares se unieron con Union-Find en 732 grupos con más de una imagen. Cada grupo se reasignó completo a su partición mayoritaria, con desempate train $>$ val $>$ test. Esto movió 1.209 imágenes de partición. Los modelos finales se reentrenan con esta partición corregida.
+	Los pares se unieron con Union-Find en 732 grupos con más de una imagen. Cada grupo se reasignó completo a su partición mayoritaria, con desempate train $>$ val $>$ test. Esto movió 1.209 imágenes de partición. Los modelos finales se reentrenan con esta partición reasignada.
 	
 	El agrupamiento dejó dos señales de alerta: el grupo más grande reúne 1.172 imágenes (8,4\,\% del dataset), lo que sugiere que encadenó imágenes similares sin ser réplicas, y 22 grupos contienen etiquetas contradictorias. Ambas se discuten en las limitaciones.
 	
@@ -134,7 +135,7 @@
 	
 	En ambas: lote de 32, entrada de $224\times224$, normalización con media y desvío de ImageNet, pérdida de entropía cruzada sin ponderar y decay de pesos $10^{-4}$. El aumento de datos (solo en entrenamiento) incluye recorte aleatorio (escala 0,85--1), giros horizontal y vertical, rotación de hasta $20^{\circ}$ y variación de brillo, contraste y saturación de 0,1. Los giros verticales son válidos porque una lesión dermatoscópica no tiene orientación natural.
 	
-	La arquitectura y la etapa se eligen por mayor AUC de validación. El umbral de decisión se fija también en validación: entre los que alcanzan sensibilidad $\geq 0{,}90$, el de mayor especificidad. La prueba se evalúa una sola vez con ese modelo y umbral.
+	La arquitectura y la etapa se eligen por mayor AUC de validación. El umbral de decisión se fija también en validación: entre los que alcanzan sensibilidad $\geq 0{,}90$, el de mayor especificidad. En la corrida final se evalúa la prueba con el modelo y el umbral fijados en validación. Parte de esas imágenes ya se había consultado durante el desarrollo, por lo que esta evaluación no constituye una prueba completamente nueva.
 	
 	\subsection{Segmentación}
 	
@@ -142,89 +143,29 @@
 	
 	\subsection{Métricas}
 	
-	\textbf{Clasificación:} AUC, sensibilidad, especificidad, precisión y F1 de la clase maligna, y matriz de confusión. Como la prueba está equilibrada por construcción, la precisión de las alertas se reestima para otras prevalencias con:
+	\textbf{Clasificación:} AUC, sensibilidad, especificidad, precisión y F1 de la clase maligna, y matriz de confusión. La prueba original contenía igual cantidad de imágenes por clase. Después de la reasignación, la prueba contiene 754 imágenes benignas y 398 malignas, equivalentes a una proporción de malignas de 34,5\,\%. Como el valor predictivo positivo (VPP) depende de la prevalencia, se calcula de forma ilustrativa para otras prevalencias supuestas mediante la siguiente expresión:
 	\begin{equation}
 		\mathrm{VPP} = \frac{\mathrm{Se}\cdot p}{\mathrm{Se}\cdot p + (1-\mathrm{Esp})(1-p)}
 		\label{eq:vpp}
 	\end{equation}
 	donde $\mathrm{Se}$ es la sensibilidad, $\mathrm{Esp}$ la especificidad y $p$ la prevalencia supuesta.
 	
-	\textbf{Segmentación:} IoU y Dice por imagen, con media, mediana e intervalo de confianza del 95\,\% por bootstrap (2.000 remuestreos), más la latencia de inferencia.
+	\textbf{Segmentación:} intersección sobre unión (IoU) y coeficiente de superposición Dice por imagen, con media, mediana e intervalo de confianza del 95\,\% por bootstrap (2.000 remuestreos), más la latencia de inferencia.
 	
 	%====================================================================
 	\section{Resultados experimentales}
 	
-	\subsection{Segmentación de la lesión}
-	
-
-	\begin{figure*}[!t]
-		\centering
-		\includegraphics[width=0.9\textwidth]{curvas_segmentacion.PNG}
-		\caption{Segmentación: pérdida, IoU y Dice por época (entrenamiento y validación).}
-		\label{fig:curvas_seg}
-	\end{figure*}
-	
-	\begin{figure*}[!t]
-		\centering
-		\begin{minipage}[t]{0.48\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{casos_mejores.PNG}\\[2pt]
-			{\footnotesize (a)}
-		\end{minipage}\hfill
-		\begin{minipage}[t]{0.48\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{casos_medianos.PNG}\\[2pt]
-			{\footnotesize (b)}
-		\end{minipage}\\[8pt]
-		\begin{minipage}[t]{0.48\textwidth}
-			\centering
-			\includegraphics[width=\linewidth]{casos_peores.PNG}\\[2pt]
-			{\footnotesize (c)}
-		\end{minipage}
-		\caption{Segmentación en prueba (imagen, máscara real y predicción): (a) mejores casos, (b) casos medianos y (c) peores casos.}
-		\label{fig:seg2}
-	\end{figure*}
-	
-	\begin{table}[H]
-		\centering
-		\caption{Segmentación en prueba ($n = 260$).}
-		\label{tab:seg}
-		\begin{tabular}{@{}lccc@{}}
-			\toprule
-			\textbf{Métrica} & \textbf{Media} & \textbf{Mediana} & \textbf{IC 95\,\% de la media} \\
-			\midrule
-			Dice & 0,883 & 0,932 & 0,863--0,899 \\
-			IoU  & 0,813 & 0,873 & 0,791--0,832 \\
-			\bottomrule
-		\end{tabular}
-	\end{table}
-	
-	La U-Net alcanza un Dice medio de 0,883 en prueba (IC 95\,\%: 0,863--0,899) con 9,0 ms por imagen, y el entrenamiento no se había estabilizado al terminar (Cuadro~\ref{tab:seg}). En validación, el Dice sube de 0,851 en la época 1 a 0,890 en la época 12, que es el punto elegido (IoU de 0,823). Según las curvas (Fig.~\ref{fig:curvas_seg}), el Dice de entrenamiento llega a cerca de 0,91 y el de validación a 0,89: la brecha es de unos 0,02 y la validación sigue subiendo al final, sin señales de sobreajuste. Por eso más épocas, mayor resolución o un encoder más grande podrían mejorar el resultado. El Dice de validación (0,890) cae dentro del intervalo de prueba.
-	
-	La mediana (0,932) supera a la media (0,883) por 0,050: la mayoría de las lesiones se segmenta bien, con el histograma concentrado por encima de 0,8 (Fig.~\ref{fig:hist_dice}), y pocos fallos bajan el promedio. Diez de 260 imágenes (3,8\,\%) tienen Dice menor a 0,5. El modelo tiene 14,3 M de parámetros y una latencia de 9,0 ms por imagen de $256\times256$ en la GPU de Colab con lote de una imagen, unas 110 imágenes por segundo.
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.95\columnwidth]{hist_dice_test.png}
-		\caption{Distribución del Dice por imagen en prueba ($n = 260$); la línea roja marca la media.}
-		\label{fig:hist_dice}
-	\end{figure}
-	
-	\textbf{Peores casos.} En los cuatro peores casos de prueba (Fig.~\ref{fig:seg2}) el modelo predice una máscara vacía (Dice de 0,00 en dos imágenes) o mucho menor que la real (Dice de 0,07 y 0,21). Las lesiones tienen bajo contraste con la piel y están acompañadas de vello abundante, tinta de marcador quirúrgico o reglas del dermatoscopio. El error dominante es entonces de sub-segmentación, no de contornos inventados.
-	
-	La segmentación se evaluó de forma independiente: el dataset de clasificación no trae máscaras, por lo que no se midió su efecto sobre la clasificación. Además, la partición 80/10/10 es aleatoria por imagen y sin identificador de lesión, así que no se puede descartar cierta fuga entre entrenamiento y prueba.
-	
 	\subsection{Auditoría de datos y clasificación}
 	
-	La partición original del dataset de clasificación no era independiente: al agrupar las réplicas y reasignarlas, el conjunto de prueba pasa de 2.000 a 1.152 imágenes y sus casos malignos, de 1.000 a 398 (Cuadro~\ref{tab:particion}).
+	La auditoría identificó candidatos visualmente similares entre las particiones originales y confirmó réplicas en una muestra inspeccionada. Al agrupar los candidatos y reasignar las imágenes, la prueba pasó de 2.000 a 1.152 imágenes y sus casos malignos de 1.000 a 398 (Cuadro~\ref{tab:particion}). Esta reasignación reduce los cruces identificados por el criterio aplicado, pero no acredita independencia completa por imagen, lesión o paciente.
 	
 	\begin{table}[H]
 		\centering
-		\caption{Imágenes por partición, original y corregida.}
+		\caption{Imágenes por partición, original y reasignada.}
 		\label{tab:particion}
 		\begin{tabular}{@{}lrrrr@{}}
 			\toprule
-			& \multicolumn{2}{c}{\textbf{Original}} & \multicolumn{2}{c}{\textbf{Corregida}} \\
+			& \multicolumn{2}{c}{\textbf{Original}} & \multicolumn{2}{c}{\textbf{Reasignada}} \\
 			\cmidrule(lr){2-3}\cmidrule(lr){4-5}
 			\textbf{Partición} & Benign & Malignant & Benign & Malignant \\
 			\midrule
@@ -235,7 +176,7 @@
 		\end{tabular}
 	\end{table}
 	
-	El procedimiento encontró 732 grupos de imágenes casi idénticas y movió 1.209 imágenes. Dos señales piden cautela: el grupo más grande reúne 1.172 imágenes (8,4\,\% del dataset), lo que sugiere que el agrupamiento encadenó imágenes similares sin ser réplicas, y 22 grupos contienen etiquetas contradictorias, indicio de ruido de etiquetas en el origen. Por eso la reducción de la prueba, en especial de 1.000 a 398 casos malignos, no es un conteo directo de réplicas.
+	El procedimiento formó 732 grupos a partir de pares candidatos por similitud perceptual y reasignó 1.209 imágenes. Los grupos no se verificaron íntegramente como conjuntos de réplicas. Dos señales piden cautela: el grupo más grande reúne 1.172 imágenes (8,4\,\% del dataset), lo que sugiere que el agrupamiento encadenó imágenes similares sin ser réplicas, y 22 grupos contienen ambas etiquetas. Esto puede responder a diferencias entre imágenes unidas por similitud, a errores de etiquetado o a ambas situaciones; la inspección disponible no permite determinar su causa en todos los grupos. Por eso la reducción de la prueba, en especial de 1.000 a 398 casos malignos, no es un conteo directo de réplicas.
 	
 	\textbf{Selección de modelo en validación.} ResNet-18 con ajuste completo obtuvo el mayor AUC de validación con ambas particiones y fue la arquitectura elegida (Cuadro~\ref{tab:val}).
 	
@@ -245,7 +186,7 @@
 		\label{tab:val}
 		\begin{tabular}{@{}llcc@{}}
 			\toprule
-			\textbf{Modelo} & \textbf{Etapa} & \textbf{Original} & \textbf{Corregida} \\
+			\textbf{Modelo} & \textbf{Etapa} & \textbf{Original} & \textbf{Reasignada} \\
 			\midrule
 			EfficientNet-B0 & Cabeza          & 0,952 & 0,944 \\
 			EfficientNet-B0 & Ajuste completo & 0,951 & 0,941 \\
@@ -271,9 +212,9 @@
 		\end{tabular}
 	\end{table}
 	
-	ResNet-18 tiene 2,8 veces más parámetros que EfficientNet-B0 y aun así la mitad de latencia: tener menos parámetros no implica mayor velocidad.
+	En el entorno y las condiciones de medición utilizados, ResNet-18 tiene 2,8 veces más parámetros que EfficientNet-B0 y aproximadamente la mitad de latencia. El número de parámetros no permite predecir por sí solo la velocidad de inferencia. Los tiempos corresponden a la ejecución del modelo con lote de una imagen y no incluyen el flujo completo de carga, preparación y visualización.
 	
-	\textbf{Evaluación en prueba.} La columna original se conserva solo como referencia; la corregida es el resultado que se reporta, con intervalos de confianza del 95\,\% por bootstrap (2.000 remuestreos) (Cuadro~\ref{tab:test}).
+	\textbf{Evaluación en prueba.} La columna original se conserva solo como referencia; la reasignada es el resultado que se reporta, con intervalos de confianza del 95\,\% por bootstrap (2.000 remuestreos) (Cuadro~\ref{tab:test}).
 	
 	\begin{table}[H]
 		\centering
@@ -282,7 +223,7 @@
 		\footnotesize
 		\begin{tabular}{@{}lcc@{}}
 			\toprule
-			\textbf{Métrica} & \textbf{Original} & \textbf{Corregida} \\
+			\textbf{Métrica} & \textbf{Original} & \textbf{Reasignada} \\
 			& ($n = 2.000$) & ($n = 1.152$) \\
 			\midrule
 			Umbral (validación)   & 0,413   & 0,576 \\
@@ -294,35 +235,109 @@
 			\bottomrule
 		\end{tabular}
 	\end{table}
+
+	\begin{table}[H]
+		\centering
+		\caption{Matriz de confusión en la prueba reasignada. Filas: etiqueta real; columnas: predicción.}
+		\label{tab:confusion}
+		\footnotesize
+		\begin{tabular}{@{}lrr@{}}
+			\toprule
+			& \textbf{Benigna} & \textbf{Maligna} \\
+			\midrule
+			\textbf{Benigna}  & 689 & 65 \\
+			\textbf{Maligna} & 29  & 369 \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
 	
-	Con la partición corregida, el umbral elegido en validación (0,576) logró una sensibilidad de 0,927 en prueba, frente a 0,940 con el umbral 0,5; la especificidad subió de 0,893 a 0,914. Hay 29 falsos negativos y 65 falsos positivos, contra 24 y 81 con 0,5: el umbral mayor cambia 5 falsos negativos más por 16 falsos positivos menos. Con esa sensibilidad y especificidad, y una prevalencia supuesta de 5\,\%, solo el 36,1\,\% de las alertas serían lesiones malignas (54,4\,\% con 10\,\%), según la ecuación~(\ref{eq:vpp}). Es un cálculo ilustrativo, no una medición clínica.
+	Con la partición reasignada, el umbral elegido en validación (0,576) logró una sensibilidad de 0,927 en prueba, frente a 0,940 con el umbral 0,5; la especificidad subió de 0,893 a 0,914. La matriz de confusión (Cuadro~\ref{tab:confusion}) contiene 29 falsos negativos y 65 falsos positivos, contra 24 y 81 con 0,5: el umbral mayor cambia 5 falsos negativos más por 16 falsos positivos menos. Con esa sensibilidad y especificidad, y una prevalencia supuesta de 5\,\%, solo el 36,1\,\% de las alertas serían lesiones malignas (54,4\,\% con 10\,\%), según la ecuación~(\ref{eq:vpp}). Es un cálculo ilustrativo que mantiene hipotéticamente la sensibilidad y la especificidad observadas y varía solo la prevalencia; no es una medición clínica.
 	
-	\textbf{Efecto de la fuga.} El AUC de prueba pasó de 0,974 a 0,977: no cae al corregir la partición. Como las pruebas son distintas (2.000 imágenes con 50\,\% de malignas frente a 1.152 con 35\,\%) y el agrupamiento pudo encadenar imágenes que no eran réplicas, estos números no permiten aislar ni descartar un efecto de la fuga. La F1 y la precisión no son comparables entre columnas porque dependen de la prevalencia. Con 398 casos malignos, los intervalos son más anchos que los de una prueba de 1.000.
+	\textbf{Efecto de la fuga.} El AUC de prueba pasó de 0,974 a 0,977 al reasignar la partición. Como las pruebas son distintas (2.000 imágenes con 50\,\% de malignas frente a 1.152 con 34,5\,\%) y el agrupamiento pudo encadenar imágenes que no eran réplicas, estos números no permiten aislar ni descartar un efecto de la fuga. La F1 y la precisión no son comparables entre columnas porque dependen de la prevalencia. Con 398 casos malignos, los intervalos son más anchos que los de una prueba de 1.000.
 	
-	La prueba corregida conserva imágenes de la prueba original, que ya se había usado para evaluar una primera versión del modelo durante el desarrollo; por eso no es una medición estrictamente independiente.
+	La prueba reasignada conserva imágenes de la prueba original, que ya se había usado para evaluar una primera versión del modelo durante el desarrollo; por eso no es una medición estrictamente independiente.
+
+	\subsection{Segmentación de la lesión}
+
+	\begin{figure*}[!t]
+		\centering
+		\includegraphics[width=0.9\textwidth]{curvas_segmentacion.PNG}
+		\caption{Segmentación: pérdida, IoU y Dice por época (entrenamiento y validación).}
+		\label{fig:curvas_seg}
+	\end{figure*}
+
+	\begin{figure*}[!t]
+		\centering
+		\begin{minipage}[t]{0.46\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{casos_mejores.PNG}\\[2pt]
+			{\small (a) Mejores casos}
+		\end{minipage}\hfill
+		\begin{minipage}[t]{0.46\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{casos_medianos.PNG}\\[2pt]
+			{\small (b) Casos medianos}
+		\end{minipage}\\[8pt]
+		\begin{minipage}[t]{0.46\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{casos_peores.PNG}\\[2pt]
+			{\small (c) Peores casos}
+		\end{minipage}
+		\caption{Ejemplos de segmentación en prueba. Cada panel muestra imagen, máscara de referencia y predicción.}
+		\label{fig:seg2}
+	\end{figure*}
+
+	\begin{table}[H]
+		\centering
+		\caption{Segmentación en prueba ($n = 260$).}
+		\label{tab:seg}
+		\begin{tabular}{@{}lccc@{}}
+			\toprule
+			\textbf{Métrica} & \textbf{Media} & \textbf{Mediana} & \textbf{IC 95\,\% de la media} \\
+			\midrule
+			Dice & 0,883 & 0,932 & 0,863--0,899 \\
+			IoU  & 0,813 & 0,873 & 0,791--0,832 \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+
+	La U-Net alcanza un Dice medio de 0,883 en prueba (IC 95\,\%: 0,863--0,899) con 9,0 ms por imagen (Cuadro~\ref{tab:seg}). En validación, el Dice sube de 0,851 en la época 1 a 0,890 en la época 12, que es el punto elegido (IoU de 0,823). Según las curvas (Fig.~\ref{fig:curvas_seg}), el Dice de entrenamiento alcanza aproximadamente 0,91 y el de validación 0,89. El mejor Dice de validación se obtiene en la última época, aunque la pérdida de validación presenta fluctuaciones. Estos resultados no permiten afirmar que se haya alcanzado el mejor desempeño posible. Ampliar las épocas o modificar la resolución o el encoder constituye una línea de trabajo futuro, cuya utilidad deberá evaluarse. La cercanía entre las medias de validación y prueba es descriptiva y no constituye una prueba de equivalencia.
+
+	La mediana (0,932) supera a la media (0,883) por 0,050: la mayoría de las lesiones se segmenta bien, con el histograma concentrado por encima de 0,8 (Fig.~\ref{fig:hist_dice}), y pocos fallos bajan el promedio. Diez de 260 imágenes (3,8\,\%) tienen Dice menor a 0,5. El modelo tiene 14,3 M de parámetros y una latencia de 9,0 ms por imagen de $256\times256$ en la GPU de Colab con lote de una imagen, unas 110 imágenes por segundo.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\columnwidth]{hist_dice_test.png}
+		\caption{Distribución del Dice por imagen en prueba ($n = 260$); la línea roja marca la media.}
+		\label{fig:hist_dice}
+	\end{figure}
+
+	\textbf{Peores casos.} En los cuatro peores casos analizados, el modelo predice una máscara vacía en dos imágenes (Dice de 0,00) o una región mucho menor que la máscara de referencia en las otras dos (Dice de 0,07 y 0,21). La Fig.~\ref{fig:seg2} muestra los dos casos con máscara predicha vacía. Las lesiones tienen bajo contraste con la piel y están acompañadas de vello abundante, tinta de marcador quirúrgico o reglas del dermatoscopio. El error dominante es entonces de sub-segmentación, no de contornos inventados.
+
+	La segmentación se evaluó de forma independiente: el dataset de clasificación no trae máscaras, por lo que no se midió su efecto sobre la clasificación. Además, la partición 80/10/10 es aleatoria por imagen y sin identificador de lesión, así que no se puede descartar cierta fuga entre entrenamiento y prueba.
 	
 	%====================================================================
 	\section{Conclusiones}
 	
-	Todas las conclusiones se apoyan en la partición corregida y en una única evaluación sobre la prueba.
+	Las conclusiones corresponden a las configuraciones y conjuntos evaluados: la partición reasignada para clasificación y la partición 80/10/10 para segmentación. La corrida final conserva la limitación de haber consultado previamente parte de la prueba de clasificación.
 	
 	\begin{enumerate}
-		\item \textbf{Auditoría.} Un hash exacto no alcanza para auditar un dataset dermoscópico público: SHA-256 encontró 0 duplicados entre particiones y dHash encontró 6.344 pares candidatos, agrupables en 732 grupos que obligaron a mover 1.209 imágenes. Las particiones deben construirse por grupos de réplicas.
-		\item \textbf{Segmentación.} La U-Net con encoder ResNet-18 alcanza un Dice de 0,883 (IC 95\,\%: 0,863--0,899) y un IoU de 0,813 en prueba ($n = 260$), con 9,0 ms por imagen, lo que permite uso interactivo.
+		\item \textbf{Auditoría.} SHA-256 no encontró archivos idénticos entre particiones, mientras que dHash identificó 6.344 pares candidatos. Su agrupamiento produjo 732 grupos y motivó la reasignación de 1.209 imágenes. Los dos procedimientos detectan tipos distintos de coincidencias; la revisión visual parcial no permite afirmar que todos los candidatos sean réplicas ni que la partición resultante sea completamente independiente.
+		\item \textbf{Segmentación.} La U-Net con encoder ResNet-18 alcanza un Dice de 0,883 (IC 95\,\%: 0,863--0,899) y un IoU de 0,813 en prueba ($n = 260$), con una latencia del modelo de 9,0 ms por imagen en el entorno medido. Este tiempo sugiere viabilidad de una interacción ágil, pero no mide el desempeño de una aplicación completa.
 		\item \textbf{Errores de segmentación.} El 3,8\,\% de las imágenes tiene Dice menor a 0,5 y la mediana (0,932) supera a la media (0,883): los errores se concentran en pocos casos difíciles, de bajo contraste, con vello, tinta o reglas, donde el modelo sub-segmenta o predice una máscara vacía.
-		\item \textbf{Arquitectura.} ResNet-18 con ajuste completo obtuvo el mayor AUC de validación (0,957 frente a 0,944 de EfficientNet-B0). El ajuste completo mejoró a ResNet-18 (0,937 a 0,957) y no a EfficientNet-B0 (0,944 a 0,941). ResNet-18 tiene 2,8 veces más parámetros pero la mitad de latencia (3,7 frente a 7,5 ms).
-		\item \textbf{Desempeño en prueba.} Con la partición corregida ($n = 1.152$), el modelo alcanza un AUC de 0,977 (0,969--0,984), sensibilidad de 0,927 (0,902--0,951) y especificidad de 0,914 (0,892--0,934), con 29 falsos negativos y 65 falsos positivos.
+		\item \textbf{Arquitectura.} Bajo las particiones, hiperparámetros y presupuesto de entrenamiento ensayados, ResNet-18 con ajuste completo obtuvo el mayor AUC de validación (0,957 frente a 0,944 de la mejor etapa de EfficientNet-B0). Esta comparación respalda la elección para esta corrida, sin establecer una superioridad general entre arquitecturas. El ajuste completo mejoró a ResNet-18 (0,937 a 0,957) y no a EfficientNet-B0 (0,944 a 0,941).
+		\item \textbf{Desempeño en prueba.} Con la partición reasignada ($n = 1.152$), el modelo alcanza un AUC de 0,977 (0,969--0,984), sensibilidad de 0,927 (0,902--0,951) y especificidad de 0,914 (0,892--0,934), con 29 falsos negativos y 65 falsos positivos.
 		\item \textbf{Umbral de operación.} Fijar en validación una sensibilidad mínima de 0,90 dio un umbral de 0,576 y se trasladó a prueba (0,927). Frente al umbral 0,5 cambia 5 falsos negativos más por 16 falsos positivos menos: la sensibilidad es una decisión de diseño explícita.
-		\item \textbf{Prevalencia.} Con una prevalencia supuesta de 5\,\%, solo el 36,1\,\% de las alertas serían malignas (54,4\,\% con 10\,\%), aunque la prueba equilibrada muestre alta precisión; por eso se reportan sensibilidad, especificidad y AUC.
-		\item \textbf{Efecto de la fuga.} El AUC de prueba pasó de 0,974 a 0,977 al corregir la partición, por lo que el efecto de la fuga no puede aislarse con estos datos: las pruebas difieren en tamaño y prevalencia, y el agrupamiento pudo encadenar imágenes no replicadas.
+		\item \textbf{Prevalencia.} Con una prevalencia supuesta de 5\,\%, solo el 36,1\,\% de las alertas serían malignas (54,4\,\% con 10\,\%), según un cálculo que mantiene hipotéticamente la sensibilidad y la especificidad observadas y varía solo la prevalencia. No se trata de una evaluación clínica. La prueba reasignada contiene 34,5\,\% de imágenes etiquetadas como malignas.
+		\item \textbf{Efecto de la fuga.} El AUC de prueba pasó de 0,974 a 0,977 al reasignar la partición, por lo que el efecto de la fuga no puede aislarse con estos datos: las pruebas difieren en tamaño y prevalencia, y el agrupamiento pudo encadenar imágenes no replicadas.
 	\end{enumerate}
 	
 	\subsection*{Limitaciones y trabajo futuro}
 	\begin{itemize}
-		\item El grupo más grande reúne 1.172 imágenes y 22 grupos tienen etiquetas contradictorias. Un análisis de sensibilidad con distancia de Hamming 0 (réplicas casi seguras) permitiría separar réplicas reales de encadenamiento.
+		\item El grupo más grande reúne 1.172 imágenes y 22 grupos tienen etiquetas contradictorias. Un análisis con umbrales alternativos, acompañado de revisión visual documentada, permitiría evaluar la sensibilidad del agrupamiento al criterio elegido. Una distancia dHash de cero tampoco confirma por sí sola la identidad de las fotografías.
 		\item Ningún dataset trae identificadores de paciente o lesión, por lo que no se garantiza independencia por paciente.
-		\item La fuente primaria, la versión y la licencia del dataset de clasificación no pudieron verificarse.
-		\item La prueba corregida conserva imágenes de la prueba original usada durante el desarrollo; una medición estrictamente nueva requiere un conjunto externo con origen y etiquetas verificables.
+		\item La descarga utilizada corresponde a la versión 1 de Kaggle. La fuente primaria y la licencia del conjunto de clasificación permanecen pendientes de verificación.
+		\item La prueba reasignada conserva imágenes de la prueba original usada durante el desarrollo; una medición estrictamente nueva requiere un conjunto externo con origen y etiquetas verificables.
 		\item La segmentación y la clasificación son modelos independientes sobre datasets distintos. El siguiente paso es segmentar, recortar y clasificar, y medir si eso mejora la sensibilidad.
 		\item El sistema es un prototipo académico: no tiene validación clínica y sus puntajes no son probabilidades calibradas.
 	\end{itemize}
@@ -338,8 +353,7 @@
 		F.~Brutti, F.~La Rosa, L.~Lazzeri, C.~Benvenuti, G.~Bagnoni, D.~Massi y M.~Laurino, ``Artificial intelligence algorithms for benign vs.\ malignant dermoscopic skin lesion image classification,'' \textit{Bioengineering}, vol.~10, no.~11, p.~1322, 2023, doi: 10.3390/bioengineering10111322.
 		
 		\bibitem{hekler2024}
-		% TODO: completar volumen, numero y paginas antes de entregar.
-		A.~Hekler \textit{et al.}, ``Using multiple real-world dermoscopic photographs of one lesion improves melanoma classification via deep learning,'' \textit{J. Am. Acad. Dermatol.}, 2024.
+		A.~Hekler \textit{et al.}, ``Using multiple real-world dermoscopic photographs of one lesion improves melanoma classification via deep learning,'' \textit{J. Am. Acad. Dermatol.}, vol.~90, no.~5, pp.~1028--1031, 2024, doi: 10.1016/j.jaad.2023.11.065.
 		
 		\bibitem{kaggle_clasif}
 		ailearner-researchlab, ``Melanoma skin cancer dataset: benign vs malignant,'' Kaggle. [En línea]. Disponible: \url{https://www.kaggle.com/datasets/ailearner-researchlab/melanoma-skin-cancer-dataset-benign-vs-malignant}
