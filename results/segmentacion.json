@@ -1,0 +1,11 @@
+{
+  "modelo": "U-Net con encoder ResNet-18",
+  "tamano_prueba": 260,
+  "mejor_dice_validacion": 0.88917,
+  "iou_media_prueba": 0.82547,
+  "ic95_iou": [0.80841, 0.84157],
+  "dice_medio_prueba": 0.89657,
+  "ic95_dice": [0.88417, 0.90822],
+  "latencia_ms_por_imagen": 3.1976,
+  "parametros_millones": 14.32821
+}

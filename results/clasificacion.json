@@ -1,0 +1,19 @@
+{
+  "modelo_seleccionado": "ResNet-18",
+  "etapa_seleccionada": "fine-tuning",
+  "tamano_prueba": 1152,
+  "umbral_decision": 0.57123,
+  "objetivo_sensibilidad_validacion": 0.9,
+  "auc": 0.97737,
+  "exactitud": 0.9184,
+  "sensibilidad": 0.92965,
+  "especificidad": 0.91247,
+  "precision_maligna": 0.84862,
+  "f1_maligna": 0.88729,
+  "matriz_confusion": {
+    "verdaderos_negativos": 688,
+    "falsos_positivos": 66,
+    "falsos_negativos": 28,
+    "verdaderos_positivos": 370
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "duplicados_exactos_entre_particiones": 0,
+  "umbral_distancia_hamming": 2,
+  "pares_candidatos_similitud_entre_particiones": 6344,
+  "grupos_de_imagenes_similares": 732,
+  "imagenes_reasignadas": 1209,
+  "tamano_maximo_de_grupo": 1172,
+  "grupos_con_conflicto_de_etiqueta": 22
+}
